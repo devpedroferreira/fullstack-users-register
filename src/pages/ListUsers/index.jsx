@@ -3,7 +3,7 @@ import api from '../../services/api'
 
 import DefaultButton from "../../components/Button"
 import TopBackGround from "../../components/TopBackGround"
-import { Page2 } from "./styles"
+import { Container } from "./styles"
 import { data, useNavigate } from "react-router-dom"
 import { Title } from "./styles"
 
@@ -26,27 +26,33 @@ const ListUsers = () => {
     }, []);
 
     return(
-        <Page2> 
+    <Container> 
         
         <div>            
             <TopBackGround />
    
             <Title> Lista de Usuarios: </Title>
             
-            {usersFromApi.map((user) => (
-                <div >
-                    <p> Nome: {user.name}</p>
-                    <p> Idade: {user.age}</p>
-                    <p> Email: {user.email}</p>
-                    <p> <br /></p>
-                </div>
-            ))}
+            <ContainerUsers>
+                {usersFromApi.map((user) => (
 
+                        <CardUsers>
+                            <div key={user.id} >
+                                <p> <br /> </p>
+                                <p> Nome:  {user.name}</p>
+                                <p> Idade: {user.age}</p>
+                                <p> Email: {user.email}</p>
+                                <p> <br /></p>
+                            </div>
+                            <TrashIcon> Deletar Usuário </TrashIcon>
+                        </CardUsers>
+                ))}
+            </ContainerUsers>
 
             <DefaultButton type='button' onClick={ () => navigate('/')}  > Voltar </DefaultButton>
         </div>
 
-        </Page2>
+    </Container>
     )
     
 }

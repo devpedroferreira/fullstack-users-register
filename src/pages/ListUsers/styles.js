@@ -2,15 +2,15 @@ import styled from "styled-components";
 
 
 // component container
-export const Page2 = styled.div`
+export const Container = styled.div`
     background-color:rgb(10, 1, 78);
-    display : flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between  ;
+    justify-content: space-between;
     padding: 20px;
-    height: 100vh;
-    
+    height: auto; /* Set height to auto for dynamic sizing */
+    min-height: 100vh; /* Ensure it takes at least the full viewport height */
 `
 
 export const Title = styled.h2`
@@ -24,4 +24,17 @@ export const Title = styled.h2`
     text-align: center;
     margin-top: 80px;
     
+`
+export const ContainerUsers = styled.div` 
+
+
+`
+export const CardUsers = styled.div` 
+
+
+`
+
+export const TrashIcon = styled.div` 
+
+
 `
