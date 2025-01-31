@@ -3,10 +3,22 @@ import api from '../../services/api'
 
 import DefaultButton from "../../components/Button"
 import TopBackGround from "../../components/TopBackGround"
-import { Container } from "./styles"
-import { data, useNavigate } from "react-router-dom"
-import { Title } from "./styles"
 
+import { 
+    Container,
+    Title,
+    ContainerUsers,
+    AvatarUser,
+    CardUsers,
+    TrashIcon
+ } from "./styles"
+ 
+import TrashIcone from '../../assets/trash.svg'
+
+import { data, useNavigate } from "react-router-dom"
+import { use } from 'react'
+
+// https://avatar.iran.liara.run/public API random avatar
 
 // get users with hook useEffects
 const ListUsers = () => {
@@ -25,6 +37,11 @@ const ListUsers = () => {
         
     }, []);
 
+    const deleteUser = async (id) => {
+        await api.delete(`/users/${id}`)
+        setUsersFromApi(usersFromApi.filter(user => user.id !== id)) // se o usuario for delete f5 na pag
+    }
+
     return(
     <Container> 
         
@@ -37,14 +54,16 @@ const ListUsers = () => {
                 {usersFromApi.map((user) => (
 
                         <CardUsers>
+                            <AvatarUser src={`https://avatar.iran.liara.run/public?username=${user.id}`} />
                             <div key={user.id} >
-                                <p> <br /> </p>
-                                <p> Nome:  {user.name}</p>
-                                <p> Idade: {user.age}</p>
-                                <p> Email: {user.email}</p>
-                                <p> <br /></p>
+
+                                <h4> {user.name}</h4>
+                                <p>Idade:{user.age}</p>
+                                <p>Email:{user.email}</p>
+                                
                             </div>
-                            <TrashIcon> Deletar Usuário </TrashIcon>
+                            <TrashIcon src={TrashIcone} alt='icone-delete-usuario' onClick={()=> deleteUser(user.id)} />
+                            
                         </CardUsers>
                 ))}
             </ContainerUsers>
